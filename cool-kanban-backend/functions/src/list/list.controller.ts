@@ -63,4 +63,43 @@ export class ListController {
         .send({ message: error.message });
     }
   }
+
+  @Put('move/:from/:to')
+  async moveFromTo(
+    @Param(':from') sourceIdList: string,
+    @Param(':to') destIdList: string,
+    @Body('source') sourceCardas: string[],
+    @Body('dest') destCards: string[],
+    @Res() res: Response,
+  ): Promise<void> {
+    try {
+      await this.listService.moveFromTo(
+        sourceIdList,
+        destIdList,
+        sourceCardas,
+        destCards,
+      );
+      res.status(HttpStatus.OK).send(true);
+    } catch (error) {
+      res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .send({ message: error.message });
+    }
+  }
+
+  @Put('move/:to')
+  async moveTo(
+    @Param(':to') id: string,
+    @Body('cards') cards: string[],
+    @Res() res: Response,
+  ): Promise<void> {
+    try {
+      await this.listService.moveTo(id, cards);
+      res.status(HttpStatus.OK).send(true);
+    } catch (error) {
+      res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .send({ message: error.message });
+    }
+  }
 }

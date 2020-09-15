@@ -105,4 +105,20 @@ export class BoardService {
     batch.delete(boardRef);
     await batch.commit();
   }
+
+  async join(id: string, uid: string): Promise<void> {
+    const batch: WriteBatch = db.batch();
+
+    await this.baseBoardService.addUserToBoard(batch, id, uid);
+    await this.baseProfileService.addBoardToProfile(batch, uid, id);
+    await batch.commit();
+  }
+
+  async kick(id: string, uid: string): Promise<void> {
+    const batch: WriteBatch = db.batch();
+
+    await this.baseBoardService.removeUserFromBoard(batch, id, uid);
+    await this.baseProfileService.removeBoardFromProfile(batch, uid, id);
+    await batch.commit();
+  }
 }

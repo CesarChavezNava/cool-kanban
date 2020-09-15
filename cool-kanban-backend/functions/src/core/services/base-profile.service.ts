@@ -10,6 +10,26 @@ import { db } from '../config/firestore.config';
 
 @Injectable()
 export class BaseProfileService {
+  async getMany(uids: string[]): Promise<Profile[]> {
+    const profiles: Profile[] = [] as Profile[];
+    for (const uid of uids) {
+      const profile: Profile = await this.get(uid);
+      profiles.push(profile);
+    }
+
+    return profiles;
+  }
+
+  async get(uid: string): Promise<Profile> {
+    const profileSnapshot: DocumentSnapshot = await db
+      .collection('profiles')
+      .doc(uid)
+      .get();
+
+    const profile: Profile = await this.fill(profileSnapshot);
+    return profile;
+  }
+
   async getBoardsByUID(uid: string): Promise<string[]> {
     let boards: string[];
     const profileSnapshot: DocumentSnapshot = await db

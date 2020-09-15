@@ -14,15 +14,7 @@ export class ProfileService {
   constructor(private baseProfileService: BaseProfileService) {}
 
   async get(uid: string): Promise<Profile> {
-    const profileSnapshot: DocumentSnapshot = await db
-      .collection('profiles')
-      .doc(uid)
-      .get();
-
-    const profile: Profile = await this.baseProfileService.fill(
-      profileSnapshot,
-    );
-    return profile;
+    return await this.baseProfileService.get(uid);
   }
 
   async update(uid: string, dto: UpdateProfileDto): Promise<Profile> {

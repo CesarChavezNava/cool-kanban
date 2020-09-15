@@ -90,4 +90,36 @@ export class BoardController {
         .send({ message: error.message });
     }
   }
+
+  @Put(':id/join/:uid')
+  async join(
+    @Param('id') id: string,
+    @Param('uid') uid: string,
+    @Res() res: Response,
+  ): Promise<void> {
+    try {
+      await this.boardService.join(id, uid);
+      res.status(HttpStatus.OK).send(true);
+    } catch (error) {
+      res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .send({ message: error.message });
+    }
+  }
+
+  @Put(':id/kick/:uid')
+  async kick(
+    @Param('id') id: string,
+    @Param('uid') uid: string,
+    @Res() res: Response,
+  ): Promise<void> {
+    try {
+      await this.boardService.kick(id, uid);
+      res.status(HttpStatus.OK).send(true);
+    } catch (error) {
+      res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .send({ message: error.message });
+    }
+  }
 }

@@ -8,10 +8,14 @@ import { Injectable } from '@nestjs/common';
 import { db } from 'core/config/firestore.config';
 import { Board } from 'core/entities/board.entity';
 import { BaseListService } from './base-list.service';
+import { BaseProfileService } from './base-profile.service';
 
 @Injectable()
 export class BaseBoardService {
-  constructor(private baseListService: BaseListService) {}
+  constructor(
+    private baseProfileService: BaseProfileService,
+    private baseListService: BaseListService,
+  ) {}
 
   async addListToBoard(
     batch: WriteBatch,
@@ -37,6 +41,30 @@ export class BaseBoardService {
     });
   }
 
+  async addUserToBoard(
+    batch: WriteBatch,
+    id: string,
+    uid: string,
+  ): Promise<void> {
+    const boardRef: DocumentReference = db.collection('boards').doc(id);
+
+    batch.update(boardRef, {
+      users: FieldValue.arrayUnion(uid),
+    });
+  }
+
+  async removeUserFromBoard(
+    batch: WriteBatch,
+    id: string,
+    uid: string,
+  ): Promise<void> {
+    const boardRef: DocumentReference = db.collection('boards').doc(id);
+
+    batch.update(boardRef, {
+      users: FieldValue.arrayRemove(uid),
+    });
+  }
+
   async fill(
     boardSnapshot: DocumentSnapshot,
     options?: { complete: boolean },
@@ -55,10 +83,10 @@ export class BaseBoardService {
         board.privacy = boardSnapshot.get('privacy');
 
         if (complete) {
-          //const admin: string = boardSnapshot.get('admin');
-          //board.admin = await this.profileService.get(admin);
-          //const users: string[] = boardSnapshot.get('users');
-          //board.users = await this.profileService.getMany(users);
+          const admin: string = boardSnapshot.get('admin');
+          board.admin = await this.baseProfileService.get(admin);
+          const users: string[] = boardSnapshot.get('users');
+          board.users = await this.baseProfileService.getMany(users);
           const lists: string[] = boardSnapshot.get('lists');
           board.lists = await this.baseListService.getMany(lists);
         }
