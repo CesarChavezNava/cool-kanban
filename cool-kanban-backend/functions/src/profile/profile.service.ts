@@ -1,8 +1,4 @@
-import {
-  DocumentReference,
-  DocumentSnapshot,
-  WriteBatch,
-} from '@google-cloud/firestore';
+import { DocumentReference, WriteBatch } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
 import { BaseProfileService } from '../core/services/base-profile.service';
 import { db } from '../core/config/firestore.config';
