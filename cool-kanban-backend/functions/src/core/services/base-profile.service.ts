@@ -5,6 +5,7 @@ import {
   WriteBatch,
 } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
+import { Profile } from '../entities/profile.entity';
 import { db } from '../config/firestore.config';
 
 @Injectable()
@@ -46,5 +47,19 @@ export class BaseProfileService {
     batch.update(profileRef, {
       boards: FieldValue.arrayRemove(idBoard),
     });
+  }
+
+  async fill(profileSnapshot: DocumentSnapshot): Promise<Profile> {
+    const profile: Profile = {} as Profile;
+    if (profileSnapshot.exists) {
+      if (profileSnapshot.data) {
+        profile.uid = profileSnapshot.id;
+        profile.email = profileSnapshot.get('email');
+        profile.username = profileSnapshot.get('username');
+        profile.boards = profileSnapshot.get('boards');
+      }
+    }
+
+    return profile;
   }
 }

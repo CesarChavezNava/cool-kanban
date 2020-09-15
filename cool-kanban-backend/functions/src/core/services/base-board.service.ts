@@ -1,11 +1,41 @@
-import { DocumentSnapshot } from '@google-cloud/firestore';
+import {
+  DocumentReference,
+  DocumentSnapshot,
+  FieldValue,
+  WriteBatch,
+} from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
+import { db } from 'core/config/firestore.config';
 import { Board } from 'core/entities/board.entity';
 import { BaseListService } from './base-list.service';
 
 @Injectable()
 export class BaseBoardService {
   constructor(private baseListService: BaseListService) {}
+
+  async addListToBoard(
+    batch: WriteBatch,
+    id: string,
+    idList: string,
+  ): Promise<void> {
+    const boardRef: DocumentReference = db.collection('boards').doc(id);
+
+    batch.update(boardRef, {
+      lists: FieldValue.arrayUnion(idList),
+    });
+  }
+
+  async removeListFromBoard(
+    batch: WriteBatch,
+    id: string,
+    idList: string,
+  ): Promise<void> {
+    const boardRef: DocumentReference = db.collection('boards').doc(id);
+
+    batch.update(boardRef, {
+      lists: FieldValue.arrayRemove(idList),
+    });
+  }
 
   async fill(
     boardSnapshot: DocumentSnapshot,

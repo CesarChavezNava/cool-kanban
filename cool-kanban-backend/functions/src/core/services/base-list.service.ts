@@ -1,4 +1,9 @@
-import { DocumentSnapshot } from '@google-cloud/firestore';
+import {
+  DocumentReference,
+  DocumentSnapshot,
+  FieldValue,
+  WriteBatch,
+} from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
 import { List } from '../entities/list.entity';
 import { db } from '../config/firestore.config';
@@ -26,6 +31,26 @@ export class BaseListService {
 
     const list: List = await this.fill(listSnapshot);
     return list;
+  }
+
+  async addCardToList(
+    batch: WriteBatch,
+    id: string,
+    idCard: string,
+  ): Promise<void> {
+    const listRef: DocumentReference = db.collection('lists').doc(id);
+
+    batch.update(listRef, {
+      cards: FieldValue.arrayUnion(idCard),
+    });
+  }
+
+  async removeCardFromList(batch: WriteBatch, id: string, idCard: string) {
+    const listRef: DocumentReference = db.collection('lists').doc(id);
+
+    batch.update(listRef, {
+      cards: FieldValue.arrayRemove(idCard),
+    });
   }
 
   private async fill(listSnapshot: DocumentSnapshot): Promise<List> {

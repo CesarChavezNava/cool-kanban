@@ -4,12 +4,14 @@ import { AppService } from './app.service';
 import { BoardModule } from './board/board.module';
 import { CoreModule } from './core/core.module';
 import { ProfileModule } from './profile/profile.module';
+import { ListModule } from './list/list.module';
+import { CardModule } from './card/card.module';
 
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
 @Module({
-  imports: [BoardModule, CoreModule, ProfileModule],
+  imports: [BoardModule, CoreModule, ProfileModule, ListModule, CardModule],
   controllers: [AppController],
   providers: [AppService],
 })
