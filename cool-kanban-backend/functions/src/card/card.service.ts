@@ -6,7 +6,7 @@ import {
 } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
 import { BaseListService } from '../core/services/base-list.service';
-import { fs, db } from '../core/config/firestore.config';
+import { fs, db } from '../core/config/firebase.config';
 import { Card } from '../core/entities/card.entity';
 import { CreateCardDto, UpdateCardDto } from './dtos';
 

@@ -20,11 +20,12 @@ export class BoardController {
   constructor(private boardService: BoardService) {}
 
   @Get()
-  async getAll(@Body('user') user: UserRecord @Res() res: Response): Promise<void> {
+  async getAll(
+    @Body('user') user: UserRecord,
+    @Res() res: Response,
+  ): Promise<void> {
     try {
-      const boards: Board[] = await this.boardService.getAll(
-        user.uid,
-      );
+      const boards: Board[] = await this.boardService.getAll(user.uid);
       res.status(HttpStatus.OK).send(boards);
     } catch (error) {
       res
@@ -52,10 +53,7 @@ export class BoardController {
     @Res() res: Response,
   ): Promise<void> {
     try {
-      const board: Board = await this.boardService.create(
-        user.uid,
-        dto,
-      );
+      const board: Board = await this.boardService.create(user.uid, dto);
       res.status(HttpStatus.CREATED).send(board);
     } catch (error) {
       res

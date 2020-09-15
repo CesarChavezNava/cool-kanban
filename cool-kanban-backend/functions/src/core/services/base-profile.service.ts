@@ -6,7 +6,7 @@ import {
 } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
 import { Profile } from '../entities/profile.entity';
-import { db } from '../config/firestore.config';
+import { db } from '../config/firebase.config';
 
 @Injectable()
 export class BaseProfileService {

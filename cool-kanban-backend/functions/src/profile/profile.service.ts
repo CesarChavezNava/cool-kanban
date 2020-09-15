@@ -1,7 +1,7 @@
 import { DocumentReference, WriteBatch } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
 import { BaseProfileService } from '../core/services/base-profile.service';
-import { db } from '../core/config/firestore.config';
+import { db } from '../core/config/firebase.config';
 import { Profile } from '../core/entities/profile.entity';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
 

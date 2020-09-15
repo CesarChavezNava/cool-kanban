@@ -1,6 +1,6 @@
 import { DocumentSnapshot, Timestamp } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
-import { db } from '../config/firestore.config';
+import { db } from '../config/firebase.config';
 import { Card } from '../entities/card.entity';
 
 @Injectable()

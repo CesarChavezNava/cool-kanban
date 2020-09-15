@@ -4,7 +4,7 @@ import {
   WriteBatch,
 } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
-import { db } from '../core/config/firestore.config';
+import { db } from '../core/config/firebase.config';
 import { Board } from '../core/entities/board.entity';
 import { BaseBoardService } from '../core/services/base-board.service';
 import { BaseProfileService } from '../core/services/base-profile.service';
