@@ -13,16 +13,17 @@ import {
 import { BoardService } from './board.service';
 import { Board } from '../core/entities/board.entity';
 import { CreateBoardDto, UpdateBoardDto } from './dtos';
+import { UserRecord } from 'firebase-functions/lib/providers/auth';
 
 @Controller('boards')
 export class BoardController {
   constructor(private boardService: BoardService) {}
 
   @Get()
-  async getAll(@Res() res: Response): Promise<void> {
+  async getAll(@Body('user') user: UserRecord @Res() res: Response): Promise<void> {
     try {
       const boards: Board[] = await this.boardService.getAll(
-        'ezJf8erEzWRcW37Pt6K4N1cq2Zw1',
+        user.uid,
       );
       res.status(HttpStatus.OK).send(boards);
     } catch (error) {
@@ -46,13 +47,13 @@ export class BoardController {
 
   @Post()
   async create(
-    //@Body('user') user: UserRecord,
+    @Body('user') user: UserRecord,
     @Body() dto: CreateBoardDto,
     @Res() res: Response,
   ): Promise<void> {
     try {
       const board: Board = await this.boardService.create(
-        'ezJf8erEzWRcW37Pt6K4N1cq2Zw1',
+        user.uid,
         dto,
       );
       res.status(HttpStatus.CREATED).send(board);

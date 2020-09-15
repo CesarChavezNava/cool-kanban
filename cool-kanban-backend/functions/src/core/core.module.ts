@@ -5,7 +5,17 @@ import { BaseListService } from './services/base-list.service';
 import { BaseCardService } from './services/base-card.service';
 
 @Module({
-  providers: [BaseBoardService, BaseProfileService, BaseListService, BaseCardService],
-  exports: [BaseBoardService, BaseProfileService, BaseListService],
+  providers: [
+    BaseBoardService,
+    BaseProfileService,
+    BaseListService,
+    BaseCardService,
+  ],
+  exports: [
+    BaseBoardService,
+    BaseProfileService,
+    BaseListService,
+    BaseCardService,
+  ],
 })
 export class CoreModule {}

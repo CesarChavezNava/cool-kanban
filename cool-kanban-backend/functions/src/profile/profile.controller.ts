@@ -3,6 +3,7 @@ import { Body, Controller, Put, Res, HttpStatus, Get } from '@nestjs/common';
 import { UpdateProfileDto } from './dtos/update-profile.dto';
 import { Profile } from '../core/entities/profile.entity';
 import { ProfileService } from './profile.service';
+import { UserRecord } from 'firebase-functions/lib/providers/auth';
 
 @Controller('profiles')
 export class ProfileController {
@@ -10,13 +11,11 @@ export class ProfileController {
 
   @Get()
   async get(
-    //@Body('user') user: UserRecord,
+    @Body('user') user: UserRecord,
     @Res() res: Response,
   ): Promise<void> {
     try {
-      const profile: Profile = await this.profileService.get(
-        'ezJf8erEzWRcW37Pt6K4N1cq2Zw1',
-      );
+      const profile: Profile = await this.profileService.get(user.uid);
       res.status(HttpStatus.OK).send(profile);
     } catch (error) {
       res
@@ -27,15 +26,12 @@ export class ProfileController {
 
   @Put()
   async update(
-    //@Body('user') user: UserRecord,
+    @Body('user') user: UserRecord,
     @Body() dto: UpdateProfileDto,
     @Res() res: Response,
   ): Promise<void> {
     try {
-      const profile: Profile = await this.profileService.update(
-        'ezJf8erEzWRcW37Pt6K4N1cq2Zw1',
-        dto,
-      );
+      const profile: Profile = await this.profileService.update(user.uid, dto);
       res.status(HttpStatus.OK).send(profile);
     } catch (error) {
       res
