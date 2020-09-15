@@ -1,9 +1,10 @@
 import * as functions from 'firebase-functions';
+import { profileTrigger } from './profile/profile.trigger';
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-export const helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info('Hello logs!', { structuredData: true });
-  response.send('Hello from Firebase!');
-});
+import { server } from './server';
+
+export const api = functions.https.onRequest(server);
+
+export const createProfile = functions.auth
+  .user()
+  .onCreate(profileTrigger.createProfile);
