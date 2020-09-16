@@ -1,0 +1,71 @@
+<app-center-container>
+    <div header>
+        <app-toggle-page page="SIGNIN"></app-toggle-page>
+    </div>
+    <div content>
+        <form [formGroup]="formGroup" (ngSubmit)="signIn()">
+            <div class="row">
+                <div class="col-xs">
+                    <div class="box">
+                        <div class="row" *ngIf="!loading">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                <div class="box">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Email Address</mat-label>
+                                        <input matInput type="email" formControlName="email" name="email" placeholder="micorreo@kanbanchallenge.com" required>
+                                        <mat-icon matSuffix>alternate_email</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-lg-6"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                <div class="box">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Password</mat-label>
+                                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" name="password" placeholder="******" required>
+                                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.arial-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                            <mat-icon>{{ hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-lg-6"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                <div class="box link-box">
+                                    <a routerLink="/forgotpassword">Forgot Password?</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                <div class="box">
+                                    <button type="submit" mat-raised-button [disabled]="formGroup.invalid" color="primary">Sign in</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-6"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                <div class="box text-box">
+                                    <p>- or -</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                <div class="box img-box">
+                                    <a (click)="signInWithGoogle()"><img src="assets/images/google.svg" alt="Google"></a>
+                                    <a (click)="signInWithFacebook()"><img src="assets/images/facebook.svg" alt="Google"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row center-xs" *ngIf="loading">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                <div class="box">
+                                    <mat-spinner></mat-spinner>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</app-center-container>
+

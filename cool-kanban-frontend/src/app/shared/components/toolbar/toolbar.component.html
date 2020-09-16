@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+    <div class="row center-xs middle-xs">
+        <div class="col-xs-4">
+            <div class="box box-left">
+                <button mat-stroked-button class="mat-elevation-z">
+                    <mat-icon>dashboard</mat-icon>
+                    Boards
+                </button>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="box box-center">
+                <span>Cool Kanban</span>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="box box-right">
+                <button mat-mini-fab aria-label="Add board" class="mat-elevation-z">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button mat-mini-fab aria-label="My profile" color="basic" class="mat-elevation-z">
+                    CN
+                </button>
+                <button mat-mini-fab aria-label="Sign out" color="basic" class="mat-elevation-z" (click)="signOut()">
+                    <mat-icon>login</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-toolbar>

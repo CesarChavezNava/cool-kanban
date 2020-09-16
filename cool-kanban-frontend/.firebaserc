@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "cool-kanban": {
+      "hosting": {
+        "cool-kanban-frontend": [
+          "cool-kanban"
+        ]
+      }
+    }
+  }
+}

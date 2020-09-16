@@ -1,0 +1,42 @@
+@import 'forms.scss';
+@import 'snackbars.scss';
+
+.text-box {
+    margin: 2rem 0;
+
+    p {
+        color: #ffffff;
+        font-size: large;
+        font-weight: 500;
+    }
+}
+
+.link-box {
+    margin: 0 0 1rem 0;
+    text-align: right;
+
+    a {
+        color: $primary-color;
+        font-size: large;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.img-box {
+    a {
+        cursor: pointer;
+        
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    img {
+        width: 36px;
+        margin: 0 0.5rem;
+    }
+}

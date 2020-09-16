@@ -1,0 +1,32 @@
+@import 'colors.scss';
+
+.mat-form-field, .mat-raised-button  {
+    width: 100%;
+}
+
+.mat-raised-button {
+    padding: 0.5rem 0;
+}
+
+.mat-raised-button[disabled] {
+    background-color: rgba($color: $primary-color, $alpha: 0.5);
+    color: rgba($color: #ffffff, $alpha: 0.5);
+}
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: $primary-color;
+}
+
+::ng-deep.mat-form-field-label{
+    color: $primary-color;
+    font-size: large;
+}
+
+.mat-icon {
+    color: #ffffff;
+}
+
+.mat-form-field-appearance-outline {
+    color: $primary-color;
+    font-size: large;
+}

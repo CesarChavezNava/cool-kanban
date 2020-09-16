@@ -1,0 +1,32 @@
+.row {
+    width: 100%;
+}
+
+.box-left {
+    text-align: left;
+
+    .mat-stroked-button {
+        border: 1px solid #ffffff;
+    }
+}
+
+.box-center {
+    text-align: center;
+
+    span {
+        margin-left: 0.5rem;
+    }
+}
+
+.box-right {
+    text-align: right;
+
+    .mat-mini-fab {
+        box-shadow: 0px rgba($color: #ffffff, $alpha: 0) !important;
+        margin-right: 0.5rem;
+    }
+    
+    .mat-mini-fab:first-child {
+        background-color: rgba($color: #ffffff, $alpha: 0.5);
+    }
+}

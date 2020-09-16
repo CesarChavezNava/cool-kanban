@@ -1,0 +1,14 @@
+@import 'colors.scss';
+
+.mat-card {
+    background-color: $primary-color;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba($color: $primary-color, $alpha: 0.8);
+    }
+
+    .mat-card-title {
+        color: #ffffff;
+    }
+}

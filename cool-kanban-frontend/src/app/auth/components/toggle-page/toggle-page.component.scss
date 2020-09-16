@@ -1,0 +1,39 @@
+@import 'sizes.scss';
+
+.row {
+    width: 100%;
+}
+
+.mat-button-toggle-group {
+    width: 100%;
+}
+
+.mat-button-toggle {
+    background-color: transparent;
+    border-radius: 1rem 1rem 0 0;
+    padding-bottom: 0.5rem;
+    width: 50%;
+
+    &:hover {
+        background-color: rgba($color: #3f51b5, $alpha: 0.2);
+    }
+
+    span {
+        color: #ffffff;
+        font-size: xx-large;
+        font-weight: bold;
+        letter-spacing: 0.2rem !important;
+    }
+
+    @media(min-width: $tablet-horizontal-max) {
+        width: 30%;
+    }
+}
+
+.mat-button-toggle-checked {
+    border-bottom: #3f51b5 0.5rem solid;
+}
+
+::ng-deep.mat-button-toggle-focus-overlay {
+    display: none;
+}

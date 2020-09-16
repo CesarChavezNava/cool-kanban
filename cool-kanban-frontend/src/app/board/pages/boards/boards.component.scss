@@ -1,0 +1,16 @@
+.row:first-child {
+    width: 100%;
+
+    .box:first-child {
+        margin: 1rem 0;
+    }
+
+    .text-box {
+        text-align: left;
+
+        span {
+            font-size: large;
+            font-weight: 500;
+        }
+    }
+}

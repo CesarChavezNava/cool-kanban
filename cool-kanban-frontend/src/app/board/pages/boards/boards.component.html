@@ -1,0 +1,27 @@
+<div class="row center-xs">
+    <div class="col-xs-11 col-sm-11 col-md-10 col-lg-8">
+        <div class="box">
+            <div class="row center-xs" *ngIf="!loading">
+                <div class="col-xs-12">
+                    <div class="box text-box">
+                        <span>My boards</span>
+                    </div>
+                </div>
+                <div class="col-xs-12" *ngIf="boards.length === 0">
+                    <span>There aren't boards yet...</span>
+                </div>
+
+                <div *ngFor="let board of boards" class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
+                    <app-board-card [board]="board"></app-board-card>
+                </div>
+            </div>
+            <div class="row center-xs" *ngIf="loading">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

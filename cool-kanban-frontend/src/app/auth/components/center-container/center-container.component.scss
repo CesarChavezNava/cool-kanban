@@ -1,0 +1,17 @@
+.row:first-child {
+    height: 80%;
+    width: 100%;
+}
+
+.box:nth-child(1) {
+    padding: 2rem 0;
+
+    .row:nth-child(2) {
+        min-height: 30rem;
+
+        .box {
+            border-radius: 2rem;
+        }
+        
+    }
+}
