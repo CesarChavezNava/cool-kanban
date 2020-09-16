@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Card } from '@shared/models/card';
+import { List } from '@shared/models/list';
 
 @Component({
   selector: 'app-list-card',
@@ -7,7 +7,7 @@ import { Card } from '@shared/models/card';
   styleUrls: ['./list-card.component.scss'],
 })
 export class ListCardComponent implements OnInit {
-  @Input() cards: Card[];
+  @Input() list: List;
 
   constructor() {}
 

@@ -39,7 +39,7 @@ export class BoardEffects {
       ofType(BoardActions.RemoveBoard),
       switchMap((action) =>
         this.boardService.delete(action.id).pipe(
-          map((board) => BoardActions.RemoveBoardSuccess()),
+          map(() => BoardActions.RemoveBoardSuccess()),
           catchError((error) => of(BoardActions.RemoveBoardFailed(error)))
         )
       )

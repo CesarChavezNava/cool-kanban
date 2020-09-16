@@ -42,7 +42,7 @@ const _boardReducer = createReducer(
   on(BoardActions.GetBoardSuccess, (state, { board }) => ({
     ...state,
     id: null,
-    boards: board,
+    board: board,
     loading: false,
     loadSuccess: true,
     success: false,

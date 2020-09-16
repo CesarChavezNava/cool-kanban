@@ -1,12 +1,15 @@
 <div class="list">
     <mat-card>
         <mat-card-header>
-            <mat-card-title>
-                <mat-form-field>
-                    <input matInput [value]="list.name">
-                    <button mat-icon-button matSuffix><mat-icon>edit</mat-icon></button>
-                </mat-form-field>
-            </mat-card-title>
+            <form [formGroup]="formGroup" (ngSubmit)="updateList()">
+                <mat-card-title>
+                    <h2 *ngIf="!edit" (click)="editList()">{{list.name}}</h2>
+                    <mat-form-field *ngIf="edit">
+                        <input matInput formControlName="name" name="name">
+                        <button mat-icon-button matSuffix (click)="updateList()"><mat-icon>edit</mat-icon></button>
+                    </mat-form-field>
+                </mat-card-title>
+            </form>
         </mat-card-header>
         <mat-card-content>
             <div cdkDropList class="box-list" 

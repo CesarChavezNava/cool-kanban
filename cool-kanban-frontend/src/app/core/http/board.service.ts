@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '@core/services/api.service';
 import { Board } from '@shared/models/board';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',

@@ -1,4 +1,5 @@
 @import 'colors.scss';
+@import 'snackbars.scss';
 
 .list {  
     margin: 0 30px;
@@ -13,6 +14,10 @@
     .mat-card-title {
         font-size: large;
         font-weight: 500;
+
+        h2 {
+            cursor: pointer;
+        }
     }
 
     .mat-form-field {

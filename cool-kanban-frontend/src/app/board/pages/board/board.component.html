@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="!loading">
     <div class="col-xs-12">
         <div class="box">
             <app-board-header [board]="board"></app-board-header>
@@ -6,10 +6,18 @@
     </div>
     <div class="col-xs-12">
         <div class="box board-box" cdkDropListGroup>
+            <app-board-list *ngFor="let list of board.lists" [list]="list"></app-board-list>
             <ng-template appDynamicHost #vcr></ng-template>
             <div class="new-list">
                 <button mat-stroked-button color="primary" (click)="addList()"><mat-icon>add</mat-icon> Add another list</button>
             </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="loading">
+    <div class="col-xs-12">
+        <div class="box">
+            <mat-spinner></mat-spinner>
         </div>
     </div>
 </div>
