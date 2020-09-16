@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MasterLayoutComponent } from './layouts/master-layout/master-layout.component';
 import { MaterialModule } from '@material/material.module';
 import { SharedModule } from '@shared/shared.module';
@@ -11,11 +12,19 @@ import { StoreModule } from '@ngrx/store';
 import { bAppReducers } from './store/reducers/b.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { BEffects } from './store/effects';
+import { BoardDialogComponent } from './components/board-dialog/board-dialog.component';
 
 @NgModule({
-  declarations: [MasterLayoutComponent, BoardsComponent, BoardCardComponent],
+  declarations: [
+    MasterLayoutComponent,
+    BoardsComponent,
+    BoardCardComponent,
+    BoardDialogComponent,
+  ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     MaterialModule,
     SharedModule,
     CoreModule,

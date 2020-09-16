@@ -17,7 +17,6 @@ export class ApiService {
   }
 
   getAll<T>(urlSegment: string): Observable<T[]> {
-    console.log(`${environment.api}/${urlSegment}`);
     return this.http
       .get<T[]>(`${environment.api}/${urlSegment}`)
       .pipe(catchError((error) => throwError(error)));

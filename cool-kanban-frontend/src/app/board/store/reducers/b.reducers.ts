@@ -5,6 +5,7 @@ import * as b from './index';
 
 export interface BState {
   boards: b.BoardsState;
+  board: b.BoardState;
 }
 
 export interface BAppState extends AppState {
@@ -13,4 +14,5 @@ export interface BAppState extends AppState {
 
 export const bAppReducers: ActionReducerMap<BState> = {
   boards: b.boardsReducer,
+  board: b.boardReducer,
 };
