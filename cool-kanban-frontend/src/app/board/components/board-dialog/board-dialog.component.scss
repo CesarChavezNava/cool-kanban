@@ -1,8 +1,16 @@
 @import 'forms.scss';
 
-p {
+p, span {
     font-size: large;
     font-weight: 500;
+}
+
+.mat-dialog-content {
+    margin: 1rem 0;
+}
+
+.mat-dialog-actions {
+    margin: 0 0 0.5rem 0;
 }
 
 .mat-raised-button {

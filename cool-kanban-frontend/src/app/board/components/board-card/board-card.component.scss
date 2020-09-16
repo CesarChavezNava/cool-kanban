@@ -1,14 +1,21 @@
 @import 'colors.scss';
 
+.box {
+    margin:  1rem 0;
+}
+
 .mat-card {
-    background-color: $primary-color;
     cursor: pointer;
 
-    &:hover {
-        background-color: rgba($color: $primary-color, $alpha: 0.8);
+    .mat-card-title {
+        color: $primary-color ;
     }
 
-    .mat-card-title {
-        color: #ffffff;
+    .mat-card-actions {
+        text-align: right;
     }
+}
+
+::ng-deep.mat-dialog-content {
+    overflow: hidden !important;
 }

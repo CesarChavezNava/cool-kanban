@@ -13,6 +13,10 @@ import { bAppReducers } from './store/reducers/b.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { BEffects } from './store/effects';
 import { BoardDialogComponent } from './components/board-dialog/board-dialog.component';
+import { BoardComponent } from './pages/board/board.component';
+import { BoardHeaderComponent } from './components/board-header/board-header.component';
+import { BoardListComponent } from './components/board-list/board-list.component';
+import { ListCardComponent } from './components/list-card/list-card.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,10 @@ import { BoardDialogComponent } from './components/board-dialog/board-dialog.com
     BoardsComponent,
     BoardCardComponent,
     BoardDialogComponent,
+    BoardComponent,
+    BoardHeaderComponent,
+    BoardListComponent,
+    ListCardComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <app-board-header [board]="board"></app-board-header>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="box board-box" cdkDropListGroup>
+            <ng-template appDynamicHost #vcr></ng-template>
+            <div class="new-list">
+                <button mat-stroked-button color="primary" (click)="addList()"><mat-icon>add</mat-icon> Add another list</button>
+            </div>
+        </div>
+    </div>
+</div>

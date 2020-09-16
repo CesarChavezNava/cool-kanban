@@ -1,0 +1,31 @@
+@import 'colors.scss';
+
+.list {  
+    margin: 0 30px;
+    min-height: 80vh;  
+    width: 250px;
+}
+
+.mat-card {
+    background-color: $list-color;
+    width: 100%;
+
+    .mat-card-title {
+        font-size: large;
+        font-weight: 500;
+    }
+
+    .mat-form-field {
+        width: 100%;
+    }
+
+    .mat-stroked-button {
+        border: 0;
+        width: 100%;
+    }
+}
+
+.box-list {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,13 @@
+.row {
+    width: 100%;
+}
+
+.mat-icon-button {
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.separator {
+    padding: 0 0.5rem;
+}

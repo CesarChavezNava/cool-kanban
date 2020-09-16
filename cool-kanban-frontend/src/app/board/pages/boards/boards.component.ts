@@ -17,9 +17,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class BoardsComponent implements OnInit, OnDestroy {
   boardsSub: Subscription;
+  boardSub: Subscription;
+
   boards: Board[];
-  loading: boolean = true;
-  name: string;
+  board: Board;
+  loading: boolean = false;
 
   currentState: string = 'BoardsState';
 
@@ -32,57 +34,52 @@ export class BoardsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(BoardsActions.GetBoards());
 
-    this.boardsSub = this.store.select('b').subscribe((state) => {
-      if (this.currentState === 'BoardsState') {
-        const boardsState = state.boards;
-        this.loading = boardsState.loading;
+    this.boardsSub = this.store.select('b', 'boards').subscribe((state) => {
+      this.loading = state.loading;
 
-        if (boardsState.loadSuccess) {
-          this.boards = boardsState.boards;
-        }
-
-        if (boardsState.loadFailed) {
-          this.boards = [];
-        }
+      if (state.loadSuccess) {
+        this.boards = state.boards;
       }
 
-      if (this.currentState === 'BoardState') {
-        const boardState = state.board;
-        this.loading = boardState.loading;
+      if (state.loadFailed) {
+        this.boards = [];
+      }
+    });
 
-        if (boardState.success) {
-          this.openSnakBar(boardState.message, 'X', 'success-snackbar');
-          this.currentState = 'BoardsState';
-          this.store.dispatch(BoardsActions.GetBoards());
-        }
+    this.boardSub = this.store.select('b', 'board').subscribe((state) => {
+      this.loading = state.loading;
 
-        if (boardState.error) {
-          this.openSnakBar(boardState.message, 'X', 'error-snackbar');
-        }
+      if (state.success) {
+        this.openSnakBar(state.message, 'X', 'success-snackbar');
+        this.store.dispatch(BoardActions.ResetBoardState());
+        this.store.dispatch(BoardsActions.GetBoards());
+      }
+
+      if (state.error) {
+        this.openSnakBar(state.message, 'X', 'error-snackbar');
       }
     });
   }
 
   ngOnDestroy(): void {
     this.boardsSub.unsubscribe();
+    this.boardSub.unsubscribe();
   }
 
   addBoard(): void {
     const dialogRef = this.dialog.open(BoardDialogComponent, {
       width: '50rem',
       height: '20rem',
-      data: { name: this.name },
+      data: { name: '', isPrivate: false },
     });
 
-    dialogRef.afterClosed().subscribe((_name) => {
-      this.currentState = 'BoardState';
-
-      const board: Board = {
-        name: _name,
-        privacy: 'PUBLIC',
+    dialogRef.afterClosed().subscribe((_board) => {
+      this.board = {
+        name: _board.name,
+        privacy: _board.isPrivate ? 'PRIVATE' : 'PUBLIC',
       } as Board;
 
-      this.store.dispatch(BoardActions.AddBoard({ board }));
+      this.store.dispatch(BoardActions.AddBoard({ board: this.board }));
     });
   }
 

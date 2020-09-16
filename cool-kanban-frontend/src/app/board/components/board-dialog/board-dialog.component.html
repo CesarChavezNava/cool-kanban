@@ -1,12 +1,15 @@
-<h1 mat-dialog-title>New board</h1>
 <div mat-dialog-content>
     <p>What's the name of the board?</p>
     <mat-form-field appearance="outline">
         <mat-label>Board name</mat-label>
-        <input matInput [(ngModel)]="data.name">
+        <input matInput [(ngModel)]="board.name">
     </mat-form-field>
+    <span>Public&nbsp;</span>
+    <mat-slide-toggle color="primary" [(ngModel)]="board.isPrivate">
+        <span>Private</span>
+    </mat-slide-toggle>
 </div>
 <div mat-dialog-actions align="end">
     <button mat-raised-button (click)="cancel()">Cancel</button>
-    <button mat-raised-button [mat-dialog-close]="data.name" cdkFocusInitial color="primary">Add</button>
+    <button mat-raised-button [mat-dialog-close]="board" cdkFocusInitial color="primary">Add</button>
 </div>

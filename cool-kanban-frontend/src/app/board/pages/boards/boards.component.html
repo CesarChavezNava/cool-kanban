@@ -14,11 +14,11 @@
                     <span>There aren't boards yet...</span>
                 </div>
 
-                <div *ngFor="let board of boards" class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
+                <div *ngFor="let board of boards" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                     <app-board-card [board]="board"></app-board-card>
                 </div>
             </div>
-            <div class="row center-xs" *ngIf="loading">
+            <div class="row" *ngIf="loading">
                 <div class="col-xs-12">
                     <div class="box">
                         <mat-spinner></mat-spinner>

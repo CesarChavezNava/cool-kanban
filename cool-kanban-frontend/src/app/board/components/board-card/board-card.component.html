@@ -1,9 +1,18 @@
 <div class="box">
     <mat-card (click)="goToBoard(board.id)">
         <mat-card-header>
+            <div mat-card-avatar>
+                <mat-icon *ngIf="board.privacy === 'PRIVATE'" color="warn">lock</mat-icon>
+                <mat-icon *ngIf="board.privacy === 'PUBLIC'" color="warn">lock_open</mat-icon>
+            </div>
             <mat-card-title>
                 {{ board.name }}
             </mat-card-title>
         </mat-card-header>
+        <mat-card-actions>
+            <button mat-button color="primary" (click)="removeBoard(board.id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-card-actions>
     </mat-card>
 </div>

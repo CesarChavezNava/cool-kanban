@@ -4,44 +4,128 @@ import { Board } from '@shared/models/board';
 import * as BoardActions from '../actions/board.actions';
 
 export interface BoardState {
+  id: string;
   board: Board;
   loading: boolean;
+  loadSuccess: boolean;
   success: boolean;
+  loadFailed: boolean;
   error: boolean;
   message: string;
 }
 
 export const boardInitialState: BoardState = {
+  id: null,
   board: null,
   loading: false,
+  loadSuccess: false,
   success: false,
+  loadFailed: false,
   error: false,
   message: null,
 };
 
 const _boardReducer = createReducer(
   boardInitialState,
-  on(BoardActions.AddBoard, (state) => ({
+  // GET
+  on(BoardActions.GetBoard, (state, { id }) => ({
     ...state,
+    id: id,
     board: null,
     loading: true,
+    loadSuccess: false,
     success: false,
-    failed: false,
+    loadFailed: false,
+    error: false,
+    message: null,
+  })),
+  on(BoardActions.GetBoardSuccess, (state, { board }) => ({
+    ...state,
+    id: null,
+    boards: board,
+    loading: false,
+    loadSuccess: true,
+    success: false,
+    loadFailed: false,
+    error: false,
+    message: null,
+  })),
+  on(BoardActions.GetBoardFailed, (state, { message }) => ({
+    ...state,
+    id: null,
+    board: null,
+    loading: false,
+    loadSuccess: false,
+    success: false,
+    loadFailed: true,
+    error: false,
+    message: message,
+  })),
+  // ADD
+  on(BoardActions.AddBoard, (state) => ({
+    ...state,
+    id: null,
+    board: null,
+    loading: true,
+    loadSuccess: false,
+    success: false,
+    loadFailed: false,
+    error: false,
     message: null,
   })),
   on(BoardActions.AddBoardSuccess, (state, { board }) => ({
     ...state,
+    id: null,
     boards: board,
     loading: false,
+    loadSuccess: false,
     success: true,
+    loadFailed: false,
     error: false,
     message: 'Bord has been added successfully',
   })),
   on(BoardActions.AddBoardFailed, (state, { message }) => ({
     ...state,
+    id: null,
     board: null,
     loading: false,
+    loadSuccess: false,
     success: false,
+    loadFailed: false,
+    error: true,
+    message: message,
+  })),
+  // REMOVE
+  on(BoardActions.RemoveBoard, (state, { id }) => ({
+    ...state,
+    id: id,
+    board: null,
+    loading: true,
+    loadSuccess: false,
+    success: false,
+    loadFailed: false,
+    error: false,
+    message: null,
+  })),
+  on(BoardActions.RemoveBoard, (state) => ({
+    ...state,
+    id: null,
+    boards: null,
+    loading: false,
+    loadSuccess: false,
+    success: true,
+    loadFailed: false,
+    error: false,
+    message: 'Bord has been removed successfully',
+  })),
+  on(BoardActions.RemoveBoardFailed, (state, { message }) => ({
+    ...state,
+    id: null,
+    board: null,
+    loading: false,
+    loadSuccess: false,
+    success: false,
+    loadFailed: false,
     error: true,
     message: message,
   })),
