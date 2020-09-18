@@ -15,6 +15,7 @@ export class ListService {
     const listRef: DocumentReference = db.collection('lists').doc();
     batch.create(listRef, {
       name: dto.name,
+      cards: [],
     });
 
     await this.baseBoardService.addListToBoard(batch, dto.idBoard, listRef.id);
@@ -23,6 +24,7 @@ export class ListService {
     const list: List = {
       id: listRef.id,
       name: dto.name,
+      cards: [],
     } as List;
 
     return list;

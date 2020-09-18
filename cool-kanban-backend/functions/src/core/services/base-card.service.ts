@@ -6,6 +6,7 @@ import { Card } from '../entities/card.entity';
 @Injectable()
 export class BaseCardService {
   async getMany(ids: string[]): Promise<Card[]> {
+    console.log('cards', ids);
     const cards: Card[] = [] as Card[];
     for (const id of ids) {
       const card: Card = await this.get(id);

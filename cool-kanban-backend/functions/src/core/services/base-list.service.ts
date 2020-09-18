@@ -15,6 +15,7 @@ export class BaseListService {
 
   async getMany(ids: string[]): Promise<List[]> {
     const lists: List[] = [] as List[];
+    console.log('list', ids);
     for (const id of ids) {
       const list: List = await this.get(id);
       lists.push(list);
@@ -61,7 +62,12 @@ export class BaseListService {
         list.name = listSnapshot.get('name');
 
         const cards: string[] = listSnapshot.get('cards');
-        list.cards = await this.baseCardService.getMany(cards);
+
+        if (cards) {
+          list.cards = await this.baseCardService.getMany(cards);
+        } else {
+          list.cards = [];
+        }
       }
     }
 
