@@ -1,7 +1,8 @@
 import { HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { UserRecord } from 'firebase-functions/lib/providers/auth';
-import { app, getConfigValue } from '../config/firebase.config';
+import { app } from '../config/firebase.config';
+import { getConfigValue } from '../config/values.config';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
@@ -31,8 +32,6 @@ export class AuthMiddleware implements NestMiddleware {
       req.body.user = {
         uid: getConfigValue().dev.uid,
       } as UserRecord;
-
-      console.log(req.body.user);
       next();
       return;
     }
