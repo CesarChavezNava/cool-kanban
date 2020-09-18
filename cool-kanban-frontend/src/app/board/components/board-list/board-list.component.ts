@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs';
 import { BAppState } from '../../store/reducers/b.reducers';
 
 import * as ListActions from '../../store/actions/list.actions';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-board-list',
@@ -21,17 +20,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class BoardListComponent implements OnInit, OnDestroy {
   @Input() list: List;
+  @Input() idBoard: string;
   formGroup: FormGroup;
   listSubs: Subscription;
   edit: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar,
     private store: Store<BAppState>
   ) {}
 
   ngOnInit(): void {
+    console.log('En lista', this.list);
+    this.edit = this.list.name === '';
+    console.log('Editar', this.edit);
+
     this.formGroup = this.formBuilder.group({
       name: [this.list.name ?? '', [Validators.required]],
     });
@@ -39,10 +42,6 @@ export class BoardListComponent implements OnInit, OnDestroy {
     this.listSubs = this.store.select('b', 'list').subscribe((state) => {
       if (state.success) {
         this.list = { ...state.list };
-      }
-
-      if (state.error) {
-        this.openSnakBar(state.message, 'X', 'error-snackbar');
       }
     });
   }
@@ -81,13 +80,11 @@ export class BoardListComponent implements OnInit, OnDestroy {
     this.edit = false;
   }
 
-  addCard(): void {}
-
-  openSnakBar(message: string, action: string, clazz: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-      verticalPosition: 'top',
-      panelClass: [clazz],
-    });
+  removeList(id: string) {
+    this.store.dispatch(
+      ListActions.RemoveList({ idBoard: this.idBoard, id: id })
+    );
   }
+
+  addCard(): void {}
 }

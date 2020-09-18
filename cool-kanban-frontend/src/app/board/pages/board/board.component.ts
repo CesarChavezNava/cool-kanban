@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { Board } from '@shared/models/board';
+import { List } from '@shared/models/list';
 import { Subscription } from 'rxjs';
 import { BAppState } from '../../store/reducers/b.reducers';
 
 import * as BoardActions from '../../store/actions/board.actions';
+import * as ListActions from '../../store/actions/list.actions';
 
 @Component({
   selector: 'app-board',
@@ -15,12 +18,14 @@ import * as BoardActions from '../../store/actions/board.actions';
 export class BoardComponent implements OnInit {
   paramsSubs: Subscription;
   boardSubs: Subscription;
+  listSubs: Subscription;
   id: string;
   board: Board;
   loading: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar,
     private store: Store<BAppState>
   ) {}
 
@@ -40,7 +45,29 @@ export class BoardComponent implements OnInit {
         this.board = state.board;
       }
     });
+
+    this.listSubs = this.store.select('b', 'list').subscribe((state) => {
+      if (state.success) {
+        this.store.dispatch(ListActions.ResetListState());
+        this.store.dispatch(BoardActions.GetBoard({ id: this.id }));
+      }
+
+      if (state.error) {
+        this.openSnakBar(state.message, 'X', 'error-snackbar');
+      }
+    });
   }
 
-  addList(): void {}
+  addList(): void {
+    const list: List = { idBoard: this.board.id, name: '' } as List;
+    this.store.dispatch(ListActions.CreateList({ list }));
+  }
+
+  openSnakBar(message: string, action: string, clazz: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      verticalPosition: 'top',
+      panelClass: [clazz],
+    });
+  }
 }

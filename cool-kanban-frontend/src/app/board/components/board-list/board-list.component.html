@@ -20,6 +20,9 @@
         </mat-card-content>
         <mat-card-actions>
             <button mat-stroked-button color="primary" (click)="addCard()"><mat-icon>add</mat-icon> Add another card</button>
+            <button mat-button color="primary" (click)="removeList(list.id)">
+                <mat-icon>delete</mat-icon>
+            </button>
           </mat-card-actions>
     </mat-card>
 </div>

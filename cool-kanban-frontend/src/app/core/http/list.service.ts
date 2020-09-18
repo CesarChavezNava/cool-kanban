@@ -19,6 +19,10 @@ export class ListService {
     return this.create(list);
   }
 
+  delete(idBoard: string, id: string): Observable<void | object> {
+    return this.apiService.delete(`${this._URL_SEGMENT}/${idBoard}/${id}`);
+  }
+
   private create(list: List): Observable<List> {
     return this.apiService.post<List>(this._URL_SEGMENT, list);
   }
