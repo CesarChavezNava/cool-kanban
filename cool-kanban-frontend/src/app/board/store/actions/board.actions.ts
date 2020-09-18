@@ -31,6 +31,21 @@ export const AddBoardFailed = createAction(
   props<{ message: string }>()
 );
 
+export const UpdateBoard = createAction(
+  '[Board] Update board',
+  props<{ board: Board }>()
+);
+
+export const UpdateBoardSuccess = createAction(
+  '[Board] Update board successfully',
+  props<{ board: Board }>()
+);
+
+export const UpdateBoardFailed = createAction(
+  '[Board] Update board failed',
+  props<{ message: string }>()
+);
+
 export const RemoveBoard = createAction(
   '[Board] Remove board',
   props<{ id: string }>()

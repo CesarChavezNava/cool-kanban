@@ -31,9 +31,7 @@ export class BoardListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('En lista', this.list);
     this.edit = this.list.name === '';
-    console.log('Editar', this.edit);
 
     this.formGroup = this.formBuilder.group({
       name: [this.list.name ?? '', [Validators.required]],

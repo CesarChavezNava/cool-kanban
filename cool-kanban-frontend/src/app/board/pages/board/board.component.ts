@@ -9,6 +9,7 @@ import { BAppState } from '../../store/reducers/b.reducers';
 
 import * as BoardActions from '../../store/actions/board.actions';
 import * as ListActions from '../../store/actions/list.actions';
+import { stat } from 'fs';
 
 @Component({
   selector: 'app-board',
@@ -43,6 +44,14 @@ export class BoardComponent implements OnInit {
 
       if (state.loadSuccess) {
         this.board = state.board;
+      }
+
+      if (state.success) {
+        this.store.dispatch(BoardActions.ResetBoardState());
+      }
+
+      if (state.error) {
+        this.openSnakBar(state.message, 'X', 'error-snackbar');
       }
     });
 

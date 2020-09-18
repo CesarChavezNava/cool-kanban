@@ -34,6 +34,18 @@ export class BoardEffects {
     )
   );
 
+  UpdateBoard$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(BoardActions.UpdateBoard),
+      switchMap((action) =>
+        this.boardService.save(action.board).pipe(
+          map((board) => BoardActions.UpdateBoardSuccess({ board })),
+          catchError((error) => of(BoardActions.UpdateBoardFailed(error)))
+        )
+      )
+    )
+  );
+
   RemoveBoard$ = createEffect(() =>
     this.action$.pipe(
       ofType(BoardActions.RemoveBoard),
