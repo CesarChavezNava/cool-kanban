@@ -45,7 +45,7 @@ export class CardService {
 
   async update(id: string, dto: UpdateCardDto): Promise<Card> {
     const batch: WriteBatch = db.batch();
-    const dueDate = fs.Timestamp.fromDate(dto.dueDate);
+    const dueDate = fs.Timestamp.fromDate(new Date(dto.dueDate));
     const cardRef: DocumentReference = db.collection('cards').doc(id);
 
     batch.update(cardRef, {
