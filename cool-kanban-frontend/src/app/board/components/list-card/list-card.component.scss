@@ -1,19 +1,14 @@
 @import 'colors.scss';
 @import 'snackbars.scss';
 
+h3 {
+    cursor: pointer;
+}
+
 .card {
     margin: 5px 0;
 }
 
 .mat-form-field {
     width: 100%;
-}
-
-.mat-card-actions {
-    text-align: center;
-
-    .mat-stroked-button {
-        border-color: $primary-color;
-        width: 40%;
-    }
 }

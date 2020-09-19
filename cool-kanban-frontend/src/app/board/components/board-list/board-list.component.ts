@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { BAppState } from '../../store/reducers/b.reducers';
 
 import * as ListActions from '../../store/actions/list.actions';
+import * as CardActions from '../../store/actions/card.actions';
 
 @Component({
   selector: 'app-board-list',
@@ -84,5 +85,16 @@ export class BoardListComponent implements OnInit, OnDestroy {
     );
   }
 
-  addCard(): void {}
+  addCard(): void {
+    const card: Card = {
+      idList: this.list.id,
+      title: '',
+      description: '',
+      dueDate: new Date(),
+      priority: 'LOW',
+    } as Card;
+
+    console.log('card', card);
+    this.store.dispatch(CardActions.AddCard({ card }));
+  }
 }

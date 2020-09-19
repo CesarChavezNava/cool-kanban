@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Card } from '@shared/models/card';
-import { List } from '@shared/models/list';
 import { BAppState } from '../../store/reducers/b.reducers';
 import { CardDialogComponent } from '../card-dialog/card-dialog.component';
 
@@ -16,10 +16,22 @@ import * as CardActions from '../../store/actions/card.actions';
 export class ListCardComponent implements OnInit {
   @Input() card: Card;
   @Input() idList: string;
+  formGroup: FormGroup;
+  edit: boolean = false;
 
-  constructor(private store: Store<BAppState>, public dialog: MatDialog) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private store: Store<BAppState>,
+    public dialog: MatDialog
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.edit = this.card.title === '';
+
+    this.formGroup = this.formBuilder.group({
+      title: [this.card.title ?? '', [Validators.required]],
+    });
+  }
 
   openCardDialog(): void {
     const dialogRef = this.dialog.open(CardDialogComponent, {
@@ -36,5 +48,14 @@ export class ListCardComponent implements OnInit {
         this.store.dispatch(CardActions.UpdateCard({ card: this.card }));
       }
     });
+  }
+
+  updateCard(): void {
+    if (this.formGroup.invalid) return;
+
+    this.card = { ...this.card, title: this.formGroup.get('title').value };
+    this.store.dispatch(CardActions.UpdateCard({ card: this.card }));
+
+    this.edit = false;
   }
 }

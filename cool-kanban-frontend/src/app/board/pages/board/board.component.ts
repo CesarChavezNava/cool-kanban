@@ -70,6 +70,7 @@ export class BoardComponent implements OnInit {
     this.cardSubs = this.store.select('b', 'card').subscribe((state) => {
       if (state.success) {
         this.store.dispatch(CardActions.ResetCardState());
+        this.store.dispatch(BoardActions.GetBoard({ id: this.id }));
       }
 
       if (state.error) {
