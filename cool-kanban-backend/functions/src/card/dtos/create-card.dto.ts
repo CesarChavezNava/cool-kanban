@@ -1,4 +1,4 @@
-import { IsString, IsDateString } from 'class-validator';
+import { IsString, IsDateString, IsOptional } from 'class-validator';
 import { Priority } from '../../core/types/priority.type';
 
 export class CreateCardDto {
@@ -14,6 +14,7 @@ export class CreateCardDto {
   @IsString()
   priority: Priority;
 
+  @IsOptional()
   @IsDateString()
   dueDate: Date;
 }

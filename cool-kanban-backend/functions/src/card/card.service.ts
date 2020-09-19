@@ -2,7 +2,6 @@ import {
   DocumentReference,
   FieldValue,
   WriteBatch,
-  Timestamp,
 } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
 import { BaseListService } from '../core/services/base-list.service';
@@ -18,12 +17,11 @@ export class CardService {
     const batch: WriteBatch = db.batch();
 
     const today: FieldValue = FieldValue.serverTimestamp();
-    const dueDate = fs.Timestamp.fromDate(dto.dueDate);
     const cardRef: DocumentReference = db.collection('cards').doc();
     batch.create(cardRef, {
-      createDate: today,
+      creationDate: today,
       description: dto.description,
-      dueDate: dueDate,
+      dueDate: today,
       priority: dto.priority,
       title: dto.title,
     });
@@ -36,8 +34,8 @@ export class CardService {
       title: dto.title,
       description: dto.description,
       priority: dto.priority,
-      creationDate: (<Timestamp>today).toDate(),
-      dueDate: dto.dueDate,
+      creationDate: new Date(),
+      dueDate: new Date(),
     };
 
     return card;
