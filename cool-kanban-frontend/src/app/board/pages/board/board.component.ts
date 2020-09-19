@@ -9,7 +9,7 @@ import { BAppState } from '../../store/reducers/b.reducers';
 
 import * as BoardActions from '../../store/actions/board.actions';
 import * as ListActions from '../../store/actions/list.actions';
-import { stat } from 'fs';
+import * as CardActions from '../../store/actions/card.actions';
 
 @Component({
   selector: 'app-board',
@@ -20,6 +20,7 @@ export class BoardComponent implements OnInit {
   paramsSubs: Subscription;
   boardSubs: Subscription;
   listSubs: Subscription;
+  cardSubs: Subscription;
   id: string;
   board: Board;
   loading: boolean;
@@ -59,6 +60,16 @@ export class BoardComponent implements OnInit {
       if (state.success) {
         this.store.dispatch(ListActions.ResetListState());
         this.store.dispatch(BoardActions.GetBoard({ id: this.id }));
+      }
+
+      if (state.error) {
+        this.openSnakBar(state.message, 'X', 'error-snackbar');
+      }
+    });
+
+    this.cardSubs = this.store.select('b', 'card').subscribe((state) => {
+      if (state.success) {
+        this.store.dispatch(CardActions.ResetCardState());
       }
 
       if (state.error) {

@@ -17,6 +17,7 @@ import { BoardComponent } from './pages/board/board.component';
 import { BoardHeaderComponent } from './components/board-header/board-header.component';
 import { BoardListComponent } from './components/board-list/board-list.component';
 import { ListCardComponent } from './components/list-card/list-card.component';
+import { CardDialogComponent } from './components/card-dialog/card-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ListCardComponent } from './components/list-card/list-card.component';
     BoardHeaderComponent,
     BoardListComponent,
     ListCardComponent,
+    CardDialogComponent,
   ],
   imports: [
     CommonModule,

@@ -74,12 +74,14 @@ export class BoardsComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((_board) => {
-      this.board = {
-        name: _board.name,
-        privacy: _board.isPrivate ? 'PRIVATE' : 'PUBLIC',
-      } as Board;
+      if (_board) {
+        this.board = {
+          name: _board.name,
+          privacy: _board.isPrivate ? 'PRIVATE' : 'PUBLIC',
+        } as Board;
 
-      this.store.dispatch(BoardActions.AddBoard({ board: this.board }));
+        this.store.dispatch(BoardActions.AddBoard({ board: this.board }));
+      }
     });
   }
 

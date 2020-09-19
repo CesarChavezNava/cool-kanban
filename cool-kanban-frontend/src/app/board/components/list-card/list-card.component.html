@@ -1,15 +1,9 @@
 <div class="card" cdkDrag>
-    <mat-card>
+    <mat-card (click)="openCardDialog()">
         <mat-card-content>
-          <span>{{ list.name }}</span>
-          <mat-form-field>
-            <mat-label></mat-label>
-            <textarea matInput></textarea>
-          </mat-form-field>
+          <span>{{ card.title }}</span>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-stroked-button color="primary"><mat-icon>save</mat-icon> Save</button>
-          <button mat-stroked-button color="primary" (click)="openCardDialog()">More Info</button>
         </mat-card-actions>
     </mat-card>
 </div>

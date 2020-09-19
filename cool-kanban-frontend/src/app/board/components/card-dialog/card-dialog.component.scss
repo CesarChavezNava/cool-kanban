@@ -1,0 +1,23 @@
+@import 'forms.scss';
+
+p, span, label {
+    font-size: large;
+    font-weight: 500;
+}
+
+.mat-dialog-content {
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.mat-dialog-actions {
+    margin: 0 0 0.5rem 0;
+}
+
+.mat-raised-button {
+    width: 25%;
+}
+
+.mat-radio-button {
+    margin: 0 1rem;
+}

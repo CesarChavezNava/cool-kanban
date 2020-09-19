@@ -15,7 +15,7 @@
             <div cdkDropList class="box-list" 
                 [cdkDropListData]="list.cards" 
                 (cdkDropListDropped)="drop($event)"> 
-                    <ng-template appDynamicHost #vcrc></ng-template>
+                    <app-list-card *ngFor="let card of list.cards" [card]="card" [idList]="list.id"></app-list-card>
             </div>
         </mat-card-content>
         <mat-card-actions>

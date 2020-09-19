@@ -7,6 +7,7 @@ export interface BState {
   boards: b.BoardsState;
   board: b.BoardState;
   list: b.ListState;
+  card: b.CardState;
 }
 
 export interface BAppState extends AppState {
@@ -17,4 +18,5 @@ export const bAppReducers: ActionReducerMap<BState> = {
   boards: b.boardsReducer,
   board: b.boardReducer,
   list: b.listReducer,
+  card: b.cardReducer,
 };
