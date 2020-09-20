@@ -12,10 +12,13 @@
             </form>
         </mat-card-header>
         <mat-card-content>
-            <div cdkDropList class="box-list" 
-                [cdkDropListData]="list.cards" 
-                (cdkDropListDropped)="drop($event)"> 
-                    <app-list-card *ngFor="let card of list.cards" [card]="card" [idList]="list.id"></app-list-card>
+            <div cdkDropList
+                [cdkDropListData]="_cards" 
+                class="box-list"
+                (cdkDropListDropped)="drop($event)"
+                (cdkDropListExited)="exited($event)"
+            > 
+                <app-list-card cdkDrag [cdkDragData]="card" *ngFor="let card of _cards" [card]="card" [idList]="list.id"></app-list-card>
             </div>
         </mat-card-content>
         <mat-card-actions>

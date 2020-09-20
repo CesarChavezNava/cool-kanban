@@ -18,6 +18,7 @@ import { BoardHeaderComponent } from './components/board-header/board-header.com
 import { BoardListComponent } from './components/board-list/board-list.component';
 import { ListCardComponent } from './components/list-card/list-card.component';
 import { CardDialogComponent } from './components/card-dialog/card-dialog.component';
+import { ListConnectToPipe } from './pipes/list-connect-to.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CardDialogComponent } from './components/card-dialog/card-dialog.compon
     BoardListComponent,
     ListCardComponent,
     CardDialogComponent,
+    ListConnectToPipe,
   ],
   imports: [
     CommonModule,

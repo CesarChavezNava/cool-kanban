@@ -6,7 +6,11 @@
     </div>
     <div class="col-xs-12">
         <div class="box board-box" cdkDropListGroup>
-            <app-board-list *ngFor="let list of board.lists" [list]="list" [idBoard]="board.id"></app-board-list> 
+            <app-board-list *ngFor="let list of board.lists" 
+                [connectTo]="board.lists | listConnectTo: list.id"
+                [list]="list" 
+                [idBoard]="board.id">
+            </app-board-list> 
             <div class="new-list">
                 <button mat-stroked-button color="primary" (click)="addList()"><mat-icon>add</mat-icon> Add another list</button>
             </div>

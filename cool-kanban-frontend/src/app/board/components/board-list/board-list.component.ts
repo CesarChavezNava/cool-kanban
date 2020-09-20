@@ -1,5 +1,8 @@
 import {
   CdkDragDrop,
+  CdkDragStart,
+  CdkDragEnter,
+  CdkDragExit,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
@@ -13,6 +16,7 @@ import { BAppState } from '../../store/reducers/b.reducers';
 
 import * as ListActions from '../../store/actions/list.actions';
 import * as CardActions from '../../store/actions/card.actions';
+import { CardDragDropService } from '../../services/card-drag-drop.service';
 
 @Component({
   selector: 'app-board-list',
@@ -20,18 +24,23 @@ import * as CardActions from '../../store/actions/card.actions';
   styleUrls: ['./board-list.component.scss'],
 })
 export class BoardListComponent implements OnInit, OnDestroy {
+  @Input() connectTo: string[];
   @Input() list: List;
   @Input() idBoard: string;
   formGroup: FormGroup;
   listSubs: Subscription;
   edit: boolean = false;
 
+  _cards: Card[];
+
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<BAppState>
+    private store: Store<BAppState>,
+    private dragDropService: CardDragDropService
   ) {}
 
   ngOnInit(): void {
+    this._cards = this.list?.cards;
     this.edit = this.list.name === '';
 
     this.formGroup = this.formBuilder.group({
@@ -50,20 +59,11 @@ export class BoardListComponent implements OnInit, OnDestroy {
   }
 
   drop(event: CdkDragDrop<Card[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
+    this.dragDropService.drop(this.list.id, event);
+  }
+
+  exited(event: CdkDragExit<Card[]>) {
+    this.dragDropService.existed(this.list.id);
   }
 
   editList(): void {

@@ -10,6 +10,7 @@ import { BAppState } from '../../store/reducers/b.reducers';
 import * as BoardActions from '../../store/actions/board.actions';
 import * as ListActions from '../../store/actions/list.actions';
 import * as CardActions from '../../store/actions/card.actions';
+import { CardDragDropService } from '../../services/card-drag-drop.service';
 
 @Component({
   selector: 'app-board',
@@ -28,7 +29,8 @@ export class BoardComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private store: Store<BAppState>
+    private store: Store<BAppState>,
+    private dragDropService: CardDragDropService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class BoardComponent implements OnInit {
 
       if (state.loadSuccess) {
         this.board = state.board;
+        this.dragDropService.addLists(this.board.lists);
       }
 
       if (state.success) {
@@ -76,6 +79,10 @@ export class BoardComponent implements OnInit {
       if (state.error) {
         this.openSnakBar(state.message, 'X', 'error-snackbar');
       }
+    });
+
+    this.dragDropService.lists$.subscribe((_lists) => {
+      this.board = { ...this.board, lists: _lists };
     });
   }
 
