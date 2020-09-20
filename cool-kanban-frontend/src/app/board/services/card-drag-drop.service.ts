@@ -4,9 +4,13 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Card } from '@shared/models/card';
 import { List } from '@shared/models/list';
 import { Subject } from 'rxjs';
+import { BAppState } from '../store/reducers/b.reducers';
+
+import * as ListActions from '../store/actions/list.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +22,7 @@ export class CardDragDropService {
 
   lists$ = this._listsSource.asObservable();
 
-  constructor() {}
+  constructor(private store: Store<BAppState>) {}
 
   addLists(lists: List[]) {
     this._lists = [...lists];
@@ -30,6 +34,12 @@ export class CardDragDropService {
 
     if (event.previousContainer === event.container) {
       moveItemInArray(currentCards, event.previousIndex, event.currentIndex);
+      this.store.dispatch(
+        ListActions.MoveTo({
+          id: idList,
+          cards: currentCards.map((_c) => _c.id),
+        })
+      );
       this.updateMoveItemInArray(idList, currentCards);
     } else {
       const previousCards: Card[] = [...event.previousContainer.data];
@@ -40,7 +50,14 @@ export class CardDragDropService {
         event.previousIndex,
         event.currentIndex
       );
-
+      this.store.dispatch(
+        ListActions.MoveFromTo({
+          previousIdList: this._previousIdList,
+          currentIdList: idList,
+          previousCards: previousCards.map((_c) => _c.id),
+          currentCards: currentCards.map((_c) => _c.id),
+        })
+      );
       this.updateTransferArrayItem(idList, previousCards, currentCards);
     }
   }

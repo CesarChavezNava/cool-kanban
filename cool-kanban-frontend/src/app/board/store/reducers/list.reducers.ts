@@ -107,6 +107,62 @@ const _listReducer = createReducer(
     error: true,
     message: message,
   })),
+  // MOVETO
+  on(ListActions.MoveTo, (state) => ({
+    ...state,
+    id: null,
+    list: null,
+    loading: true,
+    success: false,
+    error: false,
+    message: null,
+  })),
+  on(ListActions.MoveToSuccess, (state) => ({
+    ...state,
+    id: null,
+    list: null,
+    loading: false,
+    success: false, // true
+    error: false,
+    message: null,
+  })),
+  on(ListActions.MoveToFailed, (state, { message }) => ({
+    ...state,
+    id: null,
+    list: null,
+    loading: false,
+    success: false,
+    error: true,
+    message: message,
+  })),
+  // MOVEFROMTO
+  on(ListActions.MoveFromTo, (state) => ({
+    ...state,
+    id: null,
+    list: null,
+    loading: true,
+    success: false,
+    error: false,
+    message: null,
+  })),
+  on(ListActions.MoveFromToSuccess, (state) => ({
+    ...state,
+    id: null,
+    list: null,
+    loading: false,
+    success: false, // true
+    error: false,
+    message: null,
+  })),
+  on(ListActions.MoveFromToFailed, (state, { message }) => ({
+    ...state,
+    id: null,
+    list: null,
+    loading: false,
+    success: false,
+    error: true,
+    message: message,
+  })),
   on(ListActions.ResetListState, (state) => listInitialState)
 );
 

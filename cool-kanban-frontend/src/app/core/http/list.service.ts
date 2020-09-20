@@ -23,6 +23,29 @@ export class ListService {
     return this.apiService.delete(`${this._URL_SEGMENT}/${idBoard}/${id}`);
   }
 
+  moveTo(id: string, cards: string[]): Observable<void> {
+    return this.apiService.put(
+      `${this._URL_SEGMENT}/move/${id}`,
+      JSON.parse(`{ "cards": ${JSON.stringify(cards)}}`)
+    );
+  }
+
+  moveFromTo(
+    previousIdList: string,
+    currentIdList: string,
+    previousCards: string[],
+    currentCards: string[]
+  ): Observable<void> {
+    return this.apiService.put(
+      `${this._URL_SEGMENT}/move/${previousIdList}/${currentIdList}`,
+      JSON.parse(
+        `{ "source": ${JSON.stringify(previousCards)}, "dest": ${JSON.stringify(
+          currentCards
+        )}}`
+      )
+    );
+  }
+
   private create(list: List): Observable<List> {
     return this.apiService.post<List>(this._URL_SEGMENT, list);
   }

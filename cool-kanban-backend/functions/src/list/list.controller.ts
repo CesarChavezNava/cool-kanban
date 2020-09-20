@@ -66,8 +66,8 @@ export class ListController {
 
   @Put('move/:from/:to')
   async moveFromTo(
-    @Param(':from') sourceIdList: string,
-    @Param(':to') destIdList: string,
+    @Param('from') sourceIdList: string,
+    @Param('to') destIdList: string,
     @Body('source') sourceCardas: string[],
     @Body('dest') destCards: string[],
     @Res() res: Response,
@@ -89,7 +89,7 @@ export class ListController {
 
   @Put('move/:to')
   async moveTo(
-    @Param(':to') id: string,
+    @Param('to') id: string,
     @Body('cards') cards: string[],
     @Res() res: Response,
   ): Promise<void> {

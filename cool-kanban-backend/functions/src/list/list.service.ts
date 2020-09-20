@@ -71,16 +71,16 @@ export class ListService {
 
     const sourceListRef: DocumentReference = db
       .collection('lists')
-      .doc(sourceIdList);
+      .doc(sourceIdList.trim());
     batch.update(sourceListRef, {
-      cards: sourceCards,
+      cards: [...sourceCards],
     });
 
     const destListRef: DocumentReference = db
       .collection('lists')
-      .doc(destIdList);
+      .doc(destIdList.trim());
     batch.update(destListRef, {
-      cards: destCards,
+      cards: [...destCards],
     });
 
     await batch.commit();
@@ -89,9 +89,9 @@ export class ListService {
   async moveTo(id: string, cards: string[]): Promise<void> {
     const batch: WriteBatch = db.batch();
 
-    const listRef: DocumentReference = db.collection('lists').doc(id);
+    const listRef: DocumentReference = db.collection('lists').doc(id.trim());
     batch.update(listRef, {
-      cards: cards,
+      cards: [...cards],
     });
 
     await batch.commit();

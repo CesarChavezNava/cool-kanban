@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ListService } from '@core/http/list.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, switchMap } from 'rxjs/operators';
 
 import * as ListActions from '../actions/list.actions';
 
@@ -42,6 +42,37 @@ export class ListEffects {
           map(() => ListActions.RemoveListSuccess()),
           catchError((error) => of(ListActions.RemoveListFailed(error)))
         )
+      )
+    )
+  );
+
+  MoveTo$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(ListActions.MoveTo),
+      exhaustMap((action) =>
+        this.listService.moveTo(action.id, action.cards).pipe(
+          map(() => ListActions.MoveToSuccess()),
+          catchError((error) => of(ListActions.MoveToFailed(error)))
+        )
+      )
+    )
+  );
+
+  MoveFromTo$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(ListActions.MoveFromTo),
+      exhaustMap((action) =>
+        this.listService
+          .moveFromTo(
+            action.previousIdList,
+            action.currentIdList,
+            action.previousCards,
+            action.currentCards
+          )
+          .pipe(
+            map(() => ListActions.MoveFromToSuccess()),
+            catchError((error) => of(ListActions.MoveFromToFailed(error)))
+          )
       )
     )
   );

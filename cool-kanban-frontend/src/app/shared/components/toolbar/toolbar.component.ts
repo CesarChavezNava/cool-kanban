@@ -20,4 +20,8 @@ export class ToolbarComponent implements OnInit {
       console.error(error.message);
     }
   }
+
+  goToBoards() {
+    this.router.navigate(['b/boards']);
+  }
 }
