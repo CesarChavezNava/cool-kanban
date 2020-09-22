@@ -8,5 +8,6 @@ export interface Board {
   lists: List[];
   name: string;
   privacy: Privacy;
+  urlImage: string;
   users: Profile[];
 }

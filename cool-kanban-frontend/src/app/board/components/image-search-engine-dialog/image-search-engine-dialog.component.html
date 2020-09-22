@@ -1,0 +1,37 @@
+<h1 mat-dialog-title></h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <form [formGroup]="formGroup" (ngSubmit)="searchPhotos()">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Photos</mat-label>
+                        <input matInput formControlName="query" name="query" placeholder="Search" required>
+                        <mat-icon matSuffix>search</mat-icon>
+                      </mat-form-field>
+                </form>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="row" *ngIf="unsplashImages$">
+                    <input type="hidden" [(ngModel)]="image.urlImage">
+                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3" *ngFor="let unsplashImage of unsplashImages$ | async">
+                        <img [class.img-selected]="image.urlImage === unsplashImage.urlImage" [src]="unsplashImage.urlThumb" [alt]="unsplashImage.id" (click)="image.urlImage = unsplashImage.urlImage;">
+                    </div>
+                </div>
+                <div class="row" *ngIf="!unsplashImages$">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <span>No results...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button  (click)="onNoClick()">No Thanks</button>
+    <button mat-raised-button  *ngIf="image.urlImage" [mat-dialog-close]="image" cdkFocusInitial color="primary">Save</button>
+</div>

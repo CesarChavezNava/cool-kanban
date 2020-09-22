@@ -51,6 +51,8 @@ export class BoardComponent implements OnInit {
       }
 
       if (state.success) {
+        if (state.board.urlImage)
+          this.board = { ...this.board, urlImage: state.board.urlImage };
         this.store.dispatch(BoardActions.ResetBoardState());
       }
 

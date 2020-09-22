@@ -1,18 +1,20 @@
-<div class="row" *ngIf="!loading">
-    <div class="col-xs-12">
-        <div class="box">
-            <app-board-header [board]="board"></app-board-header>
+<div *ngIf="!loading">
+    <div class="row" [class.row-board]="board.urlImage" [ngStyle]="{'background-image': 'url(' + board.urlImage + ')' }">
+        <div class="col-xs-12 padding-0">
+            <div class="box">
+                <app-board-header [board]="board"></app-board-header>
+            </div>
         </div>
-    </div>
-    <div class="col-xs-12">
-        <div class="box board-box" cdkDropListGroup>
-            <app-board-list *ngFor="let list of board.lists" 
-                [connectTo]="board.lists | listConnectTo: list.id"
-                [list]="list" 
-                [idBoard]="board.id">
-            </app-board-list> 
-            <div class="new-list">
-                <button mat-stroked-button color="primary" (click)="addList()"><mat-icon>add</mat-icon> Add another list</button>
+        <div class="col-xs-12" [class.background-color]="board.urlImage">
+            <div class="box board-box" cdkDropListGroup>
+                <app-board-list *ngFor="let list of board.lists" 
+                    [connectTo]="board.lists | listConnectTo: list.id"
+                    [list]="list" 
+                    [idBoard]="board.id">
+                </app-board-list> 
+                <div class="new-list">
+                    <button mat-stroked-button color="primary" (click)="addList()"><mat-icon>add</mat-icon> Add another list</button>
+                </div>
             </div>
         </div>
     </div>

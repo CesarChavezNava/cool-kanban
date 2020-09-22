@@ -19,6 +19,7 @@ import { BoardListComponent } from './components/board-list/board-list.component
 import { ListCardComponent } from './components/list-card/list-card.component';
 import { CardDialogComponent } from './components/card-dialog/card-dialog.component';
 import { ListConnectToPipe } from './pipes/list-connect-to.pipe';
+import { ImageSearchEngineDialogComponent } from './components/image-search-engine-dialog/image-search-engine-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ListConnectToPipe } from './pipes/list-connect-to.pipe';
     ListCardComponent,
     CardDialogComponent,
     ListConnectToPipe,
+    ImageSearchEngineDialogComponent,
   ],
   imports: [
     CommonModule,

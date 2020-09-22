@@ -24,4 +24,8 @@ export class ToolbarComponent implements OnInit {
   goToBoards() {
     this.router.navigate(['b/boards']);
   }
+
+  goToProfile() {
+    this.router.navigate(['b/profile']);
+  }
 }

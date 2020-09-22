@@ -1,0 +1,30 @@
+@import 'colors.scss';
+
+.mat-raised-button  {
+    width: 25%;
+}
+
+.mat-raised-button {
+    padding: 0.5rem 0;
+}
+
+.mat-raised-button[disabled] {
+    background-color: rgba($color: $primary-color, $alpha: 0.5);
+    color: rgba($color: #ffffff, $alpha: 0.5);
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+img {
+    cursor: pointer;
+    width: 100%;
+    border-radius: 1rem;
+    opacity: 0.7;
+}
+
+.img-selected {
+    border: 3px solid $primary-color;
+    opacity: 1;
+}

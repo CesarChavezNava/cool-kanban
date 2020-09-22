@@ -18,6 +18,10 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    if (request.headers.get('skip')) {
+      return next.handle(request);
+    }
+
     return this.authService.getToken().pipe(
       mergeMap((token: string) => {
         if (token) {
