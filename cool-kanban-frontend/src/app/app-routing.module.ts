@@ -13,12 +13,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./board/board.module').then((m) => m.BoardModule),
   },
-  {
-    path: 'p',
-    canLoad: [AuthGuard],
-    loadChildren: () =>
-      import('./profile/profile.module').then((m) => m.ProfileModule),
-  },
 ];
 
 @NgModule({

@@ -21,6 +21,7 @@ import { SharedModule } from '@shared/shared.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from './app.reducers';
 import { AuthEffects } from '@auth/store/effects';
+import { ProfileEffects } from '@shared/store/effects/profile.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +33,7 @@ import { AuthEffects } from '@auth/store/effects';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot(AuthEffects),
+    EffectsModule.forRoot(AuthEffects.concat(ProfileEffects)),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

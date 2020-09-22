@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>My Profile</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput [(ngModel)]="profile.email" disabled>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="profile.username">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button [mat-dialog-close]="profile" cdkFocusInitial color="primary">Update</button>
+</div>
