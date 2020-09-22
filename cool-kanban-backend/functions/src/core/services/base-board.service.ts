@@ -81,6 +81,7 @@ export class BaseBoardService {
         board.id = boardSnapshot.id;
         board.name = boardSnapshot.get('name');
         board.privacy = boardSnapshot.get('privacy');
+        board.urlImage = boardSnapshot.get('urlImage') ?? null;
 
         if (complete) {
           const admin: string = boardSnapshot.get('admin');

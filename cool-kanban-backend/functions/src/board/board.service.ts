@@ -74,6 +74,7 @@ export class BoardService {
     batch.update(boardRef, {
       name: dto.name,
       privacy: dto.privacy,
+      urlImage: dto.urlImage,
     });
     await batch.commit();
 
@@ -81,6 +82,7 @@ export class BoardService {
       id: boardRef.id,
       name: dto.name,
       privacy: dto.privacy,
+      urlImage: dto.urlImage,
     } as Board;
 
     return board;
