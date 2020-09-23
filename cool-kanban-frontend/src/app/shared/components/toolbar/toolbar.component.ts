@@ -10,7 +10,6 @@ import { AppState } from 'src/app/app.reducers';
 import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
 
 import * as ProfileActions from '../../store/actions/profile.actions';
-import { stat } from 'fs';
 
 @Component({
   selector: 'app-toolbar',
@@ -34,7 +33,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     this.store.dispatch(ProfileActions.GetProfile());
     this.profileSubs = this.store.select('profile').subscribe((state) => {
       if (state.loadSuccess) {
-        this.profile = state.profile;
+        this.profile = { ...state.profile };
         this.btnText = this.profile.username.substr(0, 2).toUpperCase();
       }
 
@@ -44,6 +43,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       }
 
       if (state.success) {
+        this.profile = { ...this.profile, username: this.profile.username };
         this.openSnakBar(state.message, 'X', 'success-snackbar');
         this.store.dispatch(ProfileActions.ResetProfileState());
       }
@@ -76,9 +76,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((_profile) => {
       if (_profile) {
-        this.profile = { ..._profile };
         this.store.dispatch(
-          ProfileActions.UpdateProfile({ profile: this.profile })
+          ProfileActions.UpdateProfile({ profile: _profile })
         );
       }
     });

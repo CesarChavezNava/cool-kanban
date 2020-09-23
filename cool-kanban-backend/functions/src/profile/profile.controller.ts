@@ -31,6 +31,7 @@ export class ProfileController {
     @Res() res: Response,
   ): Promise<void> {
     try {
+      console.log('dto', dto);
       const profile: Profile = await this.profileService.update(user.uid, dto);
       res.status(HttpStatus.OK).send(profile);
     } catch (error) {

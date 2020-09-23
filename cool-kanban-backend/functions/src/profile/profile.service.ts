@@ -18,8 +18,7 @@ export class ProfileService {
     const profileRef: DocumentReference = db.collection('profiles').doc(uid);
 
     batch.update(profileRef, {
-      email: dto.email,
-      urlImage: dto.urlImage,
+      urlImage: dto.urlImage ?? null,
       username: dto.username,
     });
     await batch.commit();
@@ -27,7 +26,7 @@ export class ProfileService {
     const profile: Profile = {
       uid: uid,
       email: dto.email,
-      urlImage: dto.urlImage,
+      urlImage: dto.urlImage ?? null,
       username: dto.username,
     } as Profile;
 

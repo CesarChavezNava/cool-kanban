@@ -13,7 +13,9 @@ export class ProfileDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public profile: Profile
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('data', this.profile);
+  }
 
   cancel(): void {
     this.dialogRef.close();
