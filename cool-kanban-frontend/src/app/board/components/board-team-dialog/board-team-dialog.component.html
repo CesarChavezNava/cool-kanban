@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>My team</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <mat-form-field appearance="outline">
+                    <mat-label>User</mat-label>
+                    <input matInput formControlName="user" name="user" placeholder="Search" required>
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="row">
+                    <div class="col-xs-12" *ngFor="let user of users">
+                        <div class="box">
+                            <button mat-mini-fab aria-label="My profile" color="primary" class="mat-elevation-z">
+                                {{ user.username.substr(0, 2).toUpperCase() }}
+                            </button>
+                            <span>{{ user.username }}</span>[{{ user.email }}]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button  >No Thanks</button>
+    <button mat-raised-button cdkFocusInitial color="primary">Save</button>
+</div>

@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <button mat-icon-button aria-label="Edit board">
+    <button mat-icon-button aria-label="Edit board" (click)="openTeamDialog()">
         <mat-icon color="primary">groups</mat-icon>
     </button>
     <form [formGroup]="formGroup" (ngSubmit)="updateBoard()">

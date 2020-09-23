@@ -14,6 +14,7 @@ import { Privacy } from '@core/types/privacy.type';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageSearchEngineDialogComponent } from '../image-search-engine-dialog/image-search-engine-dialog.component';
 import { UnsplashImage } from '@shared/models/unsplash-image';
+import { BoardTeamDialogComponent } from '../board-team-dialog/board-team-dialog.component';
 
 @Component({
   selector: 'app-board-header',
@@ -70,6 +71,14 @@ export class BoardHeaderComponent implements OnInit {
         this.board = { ...this.board, urlImage: _image.urlImage };
         this.store.dispatch(BoardActions.UpdateBoard({ board: this.board }));
       }
+    });
+  }
+
+  openTeamDialog(): void {
+    const dialogRef = this.dialog.open(BoardTeamDialogComponent, {
+      width: '50rem',
+      height: '38rem',
+      data: this.board.users,
     });
   }
 }

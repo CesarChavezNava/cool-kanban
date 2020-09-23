@@ -20,6 +20,7 @@ import { ListCardComponent } from './components/list-card/list-card.component';
 import { CardDialogComponent } from './components/card-dialog/card-dialog.component';
 import { ListConnectToPipe } from './pipes/list-connect-to.pipe';
 import { ImageSearchEngineDialogComponent } from './components/image-search-engine-dialog/image-search-engine-dialog.component';
+import { BoardTeamDialogComponent } from './components/board-team-dialog/board-team-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ImageSearchEngineDialogComponent } from './components/image-search-engi
     CardDialogComponent,
     ListConnectToPipe,
     ImageSearchEngineDialogComponent,
+    BoardTeamDialogComponent,
   ],
   imports: [
     CommonModule,
