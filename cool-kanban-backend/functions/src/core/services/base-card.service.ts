@@ -1,7 +1,8 @@
 import { DocumentSnapshot, Timestamp } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
-import { db } from '../config/firebase.config';
+
 import { Card } from '../entities/card.entity';
+import { db } from '../config/firebase.config';
 
 @Injectable()
 export class BaseCardService {

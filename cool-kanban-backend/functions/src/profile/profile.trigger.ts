@@ -1,6 +1,7 @@
 import { auth } from 'firebase-admin';
 import { DocumentReference, WriteBatch } from '@google-cloud/firestore';
 import { EventContext } from 'firebase-functions';
+
 import { db } from '../core/config/firebase.config';
 
 export class ProfileTrigger {

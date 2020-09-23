@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { CoreModule } from '../core/core.module';
-import { BoardService } from './board.service';
+
 import { BoardController } from './board.controller';
+import { BoardService } from './board.service';
+import { CoreModule } from '../core/core.module';
 
 @Module({
   imports: [CoreModule],

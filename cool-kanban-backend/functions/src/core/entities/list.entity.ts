@@ -1,7 +1,7 @@
 import { Card } from './card.entity';
 
 export interface List {
-  id: string;
   cards: Card[];
+  id: string;
   name: string;
 }

@@ -1,17 +1,18 @@
-import { Response } from 'express';
 import {
   Body,
   Controller,
-  Post,
-  Res,
-  HttpStatus,
-  Put,
-  Param,
   Delete,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  Res,
 } from '@nestjs/common';
-import { ListService } from './list.service';
+import { Response } from 'express';
+
 import { CreateListDto, UpdateListDto } from './dtos';
 import { List } from '../core/entities/list.entity';
+import { ListService } from './list.service';
 
 @Controller('lists')
 export class ListController {
@@ -48,14 +49,14 @@ export class ListController {
     }
   }
 
-  @Delete(':idBoard/:id')
-  async delete(
-    @Param('idBoard') idBoard: string,
-    @Param('id') id: string,
+  @Put('move/:to')
+  async moveTo(
+    @Param('to') id: string,
+    @Body('cards') cards: string[],
     @Res() res: Response,
   ): Promise<void> {
     try {
-      await this.listService.delete(idBoard, id);
+      await this.listService.moveTo(id, cards);
       res.status(HttpStatus.OK).send(true);
     } catch (error) {
       res
@@ -87,14 +88,14 @@ export class ListController {
     }
   }
 
-  @Put('move/:to')
-  async moveTo(
-    @Param('to') id: string,
-    @Body('cards') cards: string[],
+  @Delete(':idBoard/:id')
+  async delete(
+    @Param('idBoard') idBoard: string,
+    @Param('id') id: string,
     @Res() res: Response,
   ): Promise<void> {
     try {
-      await this.listService.moveTo(id, cards);
+      await this.listService.delete(idBoard, id);
       res.status(HttpStatus.OK).send(true);
     } catch (error) {
       res

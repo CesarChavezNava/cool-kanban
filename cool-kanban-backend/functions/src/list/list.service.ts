@@ -1,9 +1,10 @@
 import { DocumentReference, WriteBatch } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
-import { db } from '../core/config/firebase.config';
-import { List } from '../core/entities/list.entity';
+
 import { BaseBoardService } from '../core/services/base-board.service';
 import { CreateListDto, UpdateListDto } from './dtos';
+import { db } from '../core/config/firebase.config';
+import { List } from '../core/entities/list.entity';
 
 @Injectable()
 export class ListService {
@@ -47,16 +48,13 @@ export class ListService {
     return list;
   }
 
-  async delete(idBoard: string, id: string): Promise<void> {
+  async moveTo(id: string, cards: string[]): Promise<void> {
     const batch: WriteBatch = db.batch();
 
-    await this.baseBoardService.removeListFromBoard(batch, idBoard, id);
-
-    if (true) {
-      // TODO: Crear una variable de entorno para eliminar del tablero la lista
-      const listRef: DocumentReference = db.collection('lists').doc(id);
-      batch.delete(listRef);
-    }
+    const listRef: DocumentReference = db.collection('lists').doc(id.trim());
+    batch.update(listRef, {
+      cards: [...cards],
+    });
 
     await batch.commit();
   }
@@ -86,13 +84,16 @@ export class ListService {
     await batch.commit();
   }
 
-  async moveTo(id: string, cards: string[]): Promise<void> {
+  async delete(idBoard: string, id: string): Promise<void> {
     const batch: WriteBatch = db.batch();
 
-    const listRef: DocumentReference = db.collection('lists').doc(id.trim());
-    batch.update(listRef, {
-      cards: [...cards],
-    });
+    await this.baseBoardService.removeListFromBoard(batch, idBoard, id);
+
+    if (true) {
+      // TODO: Crear una variable de entorno para eliminar del tablero la lista
+      const listRef: DocumentReference = db.collection('lists').doc(id);
+      batch.delete(listRef);
+    }
 
     await batch.commit();
   }

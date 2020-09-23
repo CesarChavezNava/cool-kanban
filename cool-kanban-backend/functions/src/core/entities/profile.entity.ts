@@ -1,7 +1,7 @@
 export interface Profile {
-  uid: string;
   boards: string[];
   email: string;
+  uid: string;
   urlImage: string;
   username: string;
 }

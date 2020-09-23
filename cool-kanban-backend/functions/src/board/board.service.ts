@@ -4,11 +4,12 @@ import {
   WriteBatch,
 } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
-import { db } from '../core/config/firebase.config';
+
 import { Board } from '../core/entities/board.entity';
 import { BaseBoardService } from '../core/services/base-board.service';
 import { BaseProfileService } from '../core/services/base-profile.service';
 import { CreateBoardDto, UpdateBoardDto } from './dtos';
+import { db } from '../core/config/firebase.config';
 
 @Injectable()
 export class BoardService {
@@ -88,6 +89,22 @@ export class BoardService {
     return board;
   }
 
+  async join(id: string, uid: string): Promise<void> {
+    const batch: WriteBatch = db.batch();
+
+    await this.baseBoardService.addUserToBoard(batch, id, uid);
+    await this.baseProfileService.addBoardToProfile(batch, uid, id);
+    await batch.commit();
+  }
+
+  async kick(id: string, uid: string): Promise<void> {
+    const batch: WriteBatch = db.batch();
+
+    await this.baseBoardService.removeUserFromBoard(batch, id, uid);
+    await this.baseProfileService.removeBoardFromProfile(batch, uid, id);
+    await batch.commit();
+  }
+
   async delete(id: string): Promise<void> {
     const batch: WriteBatch = db.batch();
     const boardRef: DocumentReference = db.collection('boards').doc(id);
@@ -105,22 +122,6 @@ export class BoardService {
     }
 
     batch.delete(boardRef);
-    await batch.commit();
-  }
-
-  async join(id: string, uid: string): Promise<void> {
-    const batch: WriteBatch = db.batch();
-
-    await this.baseBoardService.addUserToBoard(batch, id, uid);
-    await this.baseProfileService.addBoardToProfile(batch, uid, id);
-    await batch.commit();
-  }
-
-  async kick(id: string, uid: string): Promise<void> {
-    const batch: WriteBatch = db.batch();
-
-    await this.baseBoardService.removeUserFromBoard(batch, id, uid);
-    await this.baseProfileService.removeBoardFromProfile(batch, uid, id);
     await batch.commit();
   }
 }

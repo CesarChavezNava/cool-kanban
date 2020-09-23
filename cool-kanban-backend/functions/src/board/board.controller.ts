@@ -1,19 +1,20 @@
-import { Response } from 'express';
 import {
+  Body,
   Controller,
+  Delete,
   Get,
-  Res,
   HttpStatus,
   Param,
   Post,
-  Body,
   Put,
-  Delete,
+  Res,
 } from '@nestjs/common';
-import { BoardService } from './board.service';
-import { Board } from '../core/entities/board.entity';
-import { CreateBoardDto, UpdateBoardDto } from './dtos';
+import { Response } from 'express';
 import { UserRecord } from 'firebase-functions/lib/providers/auth';
+
+import { Board } from '../core/entities/board.entity';
+import { BoardService } from './board.service';
+import { CreateBoardDto, UpdateBoardDto } from './dtos';
 
 @Controller('boards')
 export class BoardController {
@@ -78,18 +79,6 @@ export class BoardController {
     }
   }
 
-  @Delete(':id')
-  async delete(@Param('id') id: string, @Res() res: Response): Promise<void> {
-    try {
-      await this.boardService.delete(id);
-      res.status(HttpStatus.OK).send(true);
-    } catch (error) {
-      res
-        .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .send({ message: error.message });
-    }
-  }
-
   @Put(':id/join/:uid')
   async join(
     @Param('id') id: string,
@@ -114,6 +103,18 @@ export class BoardController {
   ): Promise<void> {
     try {
       await this.boardService.kick(id, uid);
+      res.status(HttpStatus.OK).send(true);
+    } catch (error) {
+      res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .send({ message: error.message });
+    }
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string, @Res() res: Response): Promise<void> {
+    try {
+      await this.boardService.delete(id);
       res.status(HttpStatus.OK).send(true);
     } catch (error) {
       res

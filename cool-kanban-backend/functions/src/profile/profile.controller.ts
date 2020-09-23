@@ -1,9 +1,10 @@
 import { Response } from 'express';
-import { Body, Controller, Put, Res, HttpStatus, Get } from '@nestjs/common';
-import { UpdateProfileDto } from './dtos/update-profile.dto';
+import { Body, Controller, Get, HttpStatus, Put, Res } from '@nestjs/common';
+import { UserRecord } from 'firebase-functions/lib/providers/auth';
+
 import { Profile } from '../core/entities/profile.entity';
 import { ProfileService } from './profile.service';
-import { UserRecord } from 'firebase-functions/lib/providers/auth';
+import { UpdateProfileDto } from './dtos/update-profile.dto';
 
 @Controller('profiles')
 export class ProfileController {

@@ -4,10 +4,11 @@ import {
   WriteBatch,
 } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
+
 import { BaseListService } from '../core/services/base-list.service';
-import { fs, db } from '../core/config/firebase.config';
 import { Card } from '../core/entities/card.entity';
 import { CreateCardDto, UpdateCardDto } from './dtos';
+import { db, fs } from '../core/config/firebase.config';
 
 @Injectable()
 export class CardService {
@@ -71,7 +72,7 @@ export class CardService {
     await this.baseListService.removeCardFromList(batch, idList, id);
 
     if (true) {
-      // TODO: Crear una variable de entorno para eliminar de la lista de cards
+      // TODO: Create enviroment variable for deliting card lists
       const cardRef: DocumentReference = db.collection('cards').doc(id);
       batch.delete(cardRef);
     }

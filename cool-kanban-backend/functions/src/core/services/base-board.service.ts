@@ -5,10 +5,11 @@ import {
   WriteBatch,
 } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
-import { db } from '../config/firebase.config';
-import { Board } from '../entities/board.entity';
+
 import { BaseListService } from './base-list.service';
 import { BaseProfileService } from './base-profile.service';
+import { Board } from '../entities/board.entity';
+import { db } from '../config/firebase.config';
 
 @Injectable()
 export class BaseBoardService {

@@ -1,6 +1,7 @@
 import { HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
-import { Response, Request } from 'express';
+import { Request, Response } from 'express';
 import { UserRecord } from 'firebase-functions/lib/providers/auth';
+
 import { app } from '../config/firebase.config';
 import { getConfigValue } from '../config/values.config';
 

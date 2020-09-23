@@ -13,8 +13,8 @@ db.settings(settings);
 
 module.exports = {
   app,
-  fs,
   db,
+  fs,
 };
 
-export { app, fs, db };
+export { app, db, fs };
