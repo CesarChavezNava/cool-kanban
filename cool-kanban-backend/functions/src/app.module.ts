@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import { AuthMiddleware } from './core/middlewares/auth.middleware';
+import { BoardMiddleware } from './board/board.middleware';
 import { BoardModule } from './board/board.module';
 import { CardModule } from './card/card.module';
 import { CoreModule } from './core/core.module';
@@ -32,5 +33,9 @@ export class AppModule {
     consumer
       .apply(AuthMiddleware)
       .forRoutes({ path: '*', method: RequestMethod.ALL });
+
+    consumer
+      .apply(BoardMiddleware)
+      .forRoutes({ path: 'boards/:id', method: RequestMethod.GET });
   }
 }
