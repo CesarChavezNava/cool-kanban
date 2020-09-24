@@ -43,3 +43,11 @@ _if you going to deploy in firebase, you need blaze plan, but if you just run in
 
 ### Add a Firebase web app to the project
 1. Go to Project Configuration and then click on the "__</>__" in the bottom section "Your Applications"
+
+![Your Apps](https://github.com/CesarChavezNava/cool-kanban/blob/master/screenshots/yourApplications.PNG?raw=true)
+
+2. Name the project and then "__Register in console__"  
+![Name App](https://github.com/CesarChavezNava/cool-kanban/blob/master/screenshots/addApplication1.PNG?raw=true)
+
+__When you finish you will have your web application configured__
+![Apps](https://github.com/CesarChavezNava/cool-kanban/blob/master/screenshots/addApplication2.PNG?raw=true)
