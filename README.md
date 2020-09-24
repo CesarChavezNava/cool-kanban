@@ -40,3 +40,6 @@ Using your IDE, open or import the folder with which you going to work, "cool-ka
 
 __Important:__ 🔥🔥  
 _if you going to deploy in firebase, you need blaze plan, but if you just run in local, it doesn't need._ 
+
+### Add a Firebase web app to the project
+1. Go to Project Configuration and then click on the "__</>__" in the bottom section "Your Applications"
