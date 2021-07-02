@@ -1,6 +1,3 @@
-### 🔥🔥 __Important:__  
-_Sorry_ 🙏 _for my english_ 😞😞😞 _I try to improvement!_ ✌️  
-
 # Cool Kanban
 
 ## Starting 🚀
